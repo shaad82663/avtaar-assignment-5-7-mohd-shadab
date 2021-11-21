@@ -10,7 +10,7 @@ You'll need to have node.js installed in the machine. Git Bash is suggested as a
 
 - After clonning the repository, Navigate to the project folder by running following command in terminal:
 ```sh
- cd avtaar-assignment-2-3-mohd-shadab/
+ cd avtaar-assignment-5-7-mohd-shadab/
 ```
 
 - Run the following command to install the all the node.js packages that are used in the code.
@@ -24,9 +24,10 @@ npm run start
 ```
 
 - The ouput in the termnal will be :
->Listening Server over port 4000 in DEVELOMENT mode.
+>Listening Server over port 4000 in DEVELOPMENT mode.
 >
->mongoDB Database is connected with mongodb://localhost:27017/avtaar-mohd-shadab
+>Database connected to mongodb://localhost:27017/avtaar-mohd-shadab-4
+
 
 # REST API
 
@@ -43,8 +44,7 @@ The REST API used in the code is described below.
 #### Sample Request (JSON)
   
     {
-    "name" : "Mohd Shadab",
-    "gender" : "MALE",
+    "name" : "Mohd Shadab",   
     "email" : "shaad82663@gmail.com"
     }
     
@@ -55,113 +55,49 @@ The REST API used in the code is described below.
     user : {...user}
     
     
-## Insert into Event table
+## Insert into Item table
 
 ### Request
 
-`POST /api/v1/event/new`
+`POST /api/v1/item/new`
 
-     http://localhost:4000/api/v1/event/new  
+     http://localhost:4000/api/v1/item/new  
 
 
 #### Sample Request (JSON)
   
     {
-    "name" : "Avtaar Fest",
-    "occurance" : "WEEKLY",
-    "uid" : "6193d55e635304f71aa4ea55"
-    "startDate" : "2021-03-09",
-    "endDate" : ""
+    "name" : "Mobile",
+    "uid" : "oih123o210921904u329a"
     }
 
 ### Response
   
         HTTP/1.1 200 OK
         success : true,
-        event : {...event}
+        item : {...item}
     
-## Get all the events for today
+## Book item for users
 
 ### Request
 
-`GET /api/v1/events/today`
+`POST /api/v1/booking/new`
 
-     http://localhost:4000/api/v1/events/today  
+     http://localhost:4000/api/v1/booking/new  
      
 #### Sample Request (JSON)
   
-    {} //NO INPUT REQUIRED         
+    {
+    "uid" : ["a1kj2b1iu3290209hboasa", "a1kj2b1iu3290209hboa5k"],
+    "id" : ["q429083hoifb90hsofisona", "adasj2b1iu3290209hboda1"]
+    }       
 
 ### Response
   
         HTTP/1.1 200 OK
         success : true,
-        count : events.length,
-        events : [...events]
+        bookings : [...bookings]
     
-
-        
-## Get all users for list of uid
-
-### Request
-
-`GET /api/v1/users`
-
-     http://localhost:4000/api/v1/users
-
-#### Sample Request (JSON)
-  
-    {
-    "uid" : ["6193d55e635304f71aa4ea55", "6193d701f37175bbaa345a0f"]
-    } 
-
-### Response
-  
-         HTTP/1.1 200 OK
-         success : true,
-         users : {...users}
-                 
-         
-## Get the all the events for given uid
-
-### Request
-
-`GET /api/v1/events`
-
-     http://localhost:4000/api/v1/events
-     
-#### Sample Request (JSON)
-  
-    {
-    "uid" : "6193d55e635304f71aa4ea55"
-    } 
-
-### Response
-  
-         HTTP/1.1 200 OK
-         success : true,
-         count : eventsForUid.length,
-         eventsForUid : {...eventsForUid}   
-                   
-         
-## Get all events for the next 7 days
-
-### Request
-
-`GET /api/v1/events/week`
-
-     http://localhost:4000/api/v1/events/week
-     
-#### Sample Request (JSON)
-  
-    {} //NO INPUT REQUIRED      
-     
-### Response
-  
-         HTTP/1.1 200 OK
-        success : true,
-        count : events.length,
-        events : {...events}    
 
 ### NOTE :
 Some error habdling functions/modules will be added later while working on front-end because those are PRODUCTION based errors which will seen by end user. For now all errors are DEVELOPMENT based i.e. in most of the cases, only a programmer can understand the errors.
@@ -180,16 +116,14 @@ npm run start
 ```
 
 ## Output
-### Assignment-2
-[Output-1](https://res.cloudinary.com/shaad82663/image/upload/v1637232316/Avtaar-Internship-Assisnments/Q-1_azz5ng.png)
-[Output-2](https://res.cloudinary.com/shaad82663/image/upload/v1637232316/Avtaar-Internship-Assisnments/Q-2_jujqdh.png)
+### Assignment-5
+[Output-1](https://res.cloudinary.com/shaad82663/image/upload/v1637521517/Avtaar-Internship-Assisnments/slast-1-user_fy2uqp.png)
+[Output-2](https://res.cloudinary.com/shaad82663/image/upload/v1637521517/Avtaar-Internship-Assisnments/slast-2-item_gresfg.png)
 
-### Assignment-3
-[Output-1: 5 users-screenshot](https://res.cloudinary.com/shaad82663/image/upload/v1637232766/Avtaar-Internship-Assisnments/Screenshot_223_syyhwa.png)
-[Output-1: 5 users-txt-file](https://res.cloudinary.com/shaad82663/raw/upload/v1637232980/Avtaar-Internship-Assisnments/o-1_gx7ifq.txt)
+### Assignment-7
+[Output-1: 5 bookingss-screenshot](https://res.cloudinary.com/shaad82663/image/upload/v1637521517/Avtaar-Internship-Assisnments/Last-out_gzah3d.png)
+[Output-1: 5 bookings-txt-file](https://res.cloudinary.com/shaad82663/raw/upload/v1637521640/Avtaar-Internship-Assisnments/last-out_kz8omn.txt)
 
-[Output-2: 20 events-screenshot](https://res.cloudinary.com/shaad82663/image/upload/v1637232546/Avtaar-Internship-Assisnments/Screenshot_222_yb2ues.png)
-[Output-2: 20 events-txt-file](https://res.cloudinary.com/shaad82663/raw/upload/v1637232980/Avtaar-Internship-Assisnments/o-2_ke6qiz.txt)
 
 
 
