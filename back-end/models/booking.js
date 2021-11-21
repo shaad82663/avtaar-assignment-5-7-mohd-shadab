@@ -19,10 +19,12 @@ const bookingSchema = mongoose.Schema({
         ref : 'Item'
     },
     startDate : {
-        type : Date
+        type : Date,
+        required : true
     },
     endDate : {
-        type : Date
+        type : Date,
+        required : true
     }
 })
 
