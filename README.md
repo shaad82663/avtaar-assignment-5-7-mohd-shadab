@@ -1,7 +1,7 @@
 # avtaar-assignment-5-7-mohd-shadab
 
 ### NOTE :
-As the assignments 1 and 2 were part of each other and mentor suggested to do both the assignments simultaneously so both the assignments are submitted in form of one repo. The github repo link provided in assignment 2 and 3 are same. It is done to ensure that both the assignments will be marked as done without any confusion.
+As the assignments 5 and 7 were part of each other so both the assignments are submitted in form of one repo. The github repo link provided in assignment 5 and 7 are same. It is done to ensure that both the assignments will be marked as done without any confusion.
 
 
 ##  Steps to run the code (Windows OS)
