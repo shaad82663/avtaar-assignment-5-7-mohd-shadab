@@ -61,29 +61,30 @@ exports.newBooking = catchAsyncErrors (async (req, res, next) => {
         return next(new ErrorHandler('No item found!', 404));
     }
 
-    //Getting all bookings for given item in sorted order of endDate
-    const bookings = await Booking.find({id : itemId}).sort({endDate : 1});
-    var start = new Date();
-
-    var end = new Date();
-    end.setDate(start.getDate() + 6);
-
-    if(bookings.length != 0){  //IF it is not the first booking => checking for slot.
-        //TODO: fucntion it 
-        //IF user has already book this item.
-        if(hasBooked(bookings, bookId)){ //function hasBooked() defined below.
-             return next(new ErrorHandler(`User with uid ${uid} has already booked item : ${itemId}`, 404));
-        }
-
-       //IF user did not book this item  => find slot for this booking.   
-      //getting end date of the last booking. 
-      const { endDate } = bookings[bookings.length-1];
-      
-      start.setDate(endDate.getDate()+1);
-      end.setDate(start.getDate()+6);
+    //IF user has already book this item.
+    const hasAlreadyBooked = await Booking.findOne({_id : bookId});
+    if(hasAlreadyBooked) {
+        return next(new ErrorHandler(`User with uid ${uid} has already booked item : ${itemId}`, 404));
     }
-    req.body.startDate = start;
-    req.body.endDate = end;   
+
+    //Getting the last booking for the given item.
+    const lastBooking = await Booking.findOne({id : itemId}).sort({endDate : 1});
+
+    var bookingStartDate = new Date();
+
+    var bookingEndDate = new Date();
+    bookingEndDate.setDate(bookingStartDate.getDate() + 6);
+
+    if(lastBooking){  //IF it is not the first booking for given item => checking for slot.
+
+      //getting end date of the last booking. 
+      const { endDate } = lastBooking;
+      
+      bookingStartDate.setDate(endDate.getDate()+1);
+      bookingEndDate.setDate(bookingStartDate.getDate()+6);
+    }
+    req.body.startDate = bookingStartDate;
+    req.body.endDate = bookingEndDate;   
 
     req.body.uid = uid;
     req.body.id = itemId;
@@ -97,13 +98,3 @@ exports.newBooking = catchAsyncErrors (async (req, res, next) => {
     })
 
 })
-
-//Checks if user has already booked the ticket or not.
-function hasBooked(bookings, bookId) {
-    for(var i = 0; i<bookings.length; i++) {
-        const { _id } = bookings[i];
-        if(_id === bookId) return true;
-      }
-
-      return false;  
-}
